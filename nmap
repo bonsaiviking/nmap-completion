@@ -55,7 +55,9 @@ _nmap() {
                 _available_interfaces
                 ;;
             --spoof-mac)
-                COMPREPLY=( $( grep -i "^[^#]..... $cur" $NMAPDIR/nmap-mac-prefixes | cut -d\  -f2 ) )
+                local IFS=$'\n'
+                realcur=${cur#[\'\"]}
+                COMPREPLY=( $( compgen -W "$( grep -i "^[^#]..... $realcur" $NMAPDIR/nmap-mac-prefixes | cut -d\  -f2- )" -X "!$realcur*" -P "'" -S "'" -- $realcur ) )
                 ;;
             --datadir)
                 _filedir -d
