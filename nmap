@@ -4,9 +4,10 @@
 _nmap() {
     
     COMPREPLY=()
-    local cur prev
+    local cur prev NMAPDIR
     cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
+    NMAPDIR=/usr/local/share/nmap
     
     common_options="-i[INPUT_TARGETS] -s[SCAN_TECHNIQUES] -b -r -R -f -D -S -e -g -d -p[PORTS] -F --top-ports --version-light --version-all --script -O -P[PING_TYPE] -n --traceroute -T[TIMING] -o[OUTPUT_TYPE] -v --reason --open -6 -A  --randomize-hosts --version --help"
     all_options="-iR --exclude -sL -sn -sS -sT -sA -sW -sM -sU -sN -sF -sX -sI -sY -sZ -sO -sV -b -p -F -r --top-ports --port-ratio --version-intensity --version-light --version-all --version-trace -sC --script --script-args --script-trace --script-updatedb -O --osscan-limit --osscan-guess -Pn -PS -PA -PU -PY -PE -PP -PM -PO -n -R --dns-servers --system-dns --traceroute -T --min-hostgroup --max-hostgroup --max-retries --min-rate --max-rate -f --mtu -D -S -e -g --source-port --data-length --ip-options --ttl --spoof-mac --badsum --adler32 -oN -oX -oS -oG -oA -v -d --reason --open --packet-trace --iflist --log-errors --append-output --webxml --no-stylesheet -6 -A --datadir --send-eth --send-ip --privileged --unprivileged -V -h --scanflags --allports -sR --max-os-tries --defeat-rst-ratelimit --randomize-hosts --release-memory --version --help"
@@ -39,14 +40,14 @@ _nmap() {
                 COMPREPLY=( $( compgen -W "0 1 2 3 4 5 6 7 8 9" -- $cur ) )
                 ;;
             --script)
-                categories=$(perl -ne '$s{$1}=undef if/categories = { "([^"]+)", /gc;$s{$1}=undef while(/\G"([^"]+)", /gc);END{$,=" ";print keys %s}' /usr/local/share/nmap/scripts/script.db)
+                categories=$(perl -ne '$s{$1}=undef if/categories = { "([^"]+)", /gc;$s{$1}=undef while(/\G"([^"]+)", /gc);END{$,=" ";print keys %s}' $NMAPDIR/scripts/script.db)
                 if [[ "$cur" == *,* ]]; then
                 realcur=${cur##*,}
                 prefix=${cur%,*}
-                COMPREPLY=( $( cd /usr/local/share/nmap/scripts/ >/dev/null && 
+                COMPREPLY=( $( cd $NMAPDIR/scripts/ >/dev/null && 
                     compgen -W "$categories all" -G "*.nse" -X "!$realcur*" -P "$prefix," -- $realcur ) )
                 else
-                COMPREPLY=( $( cd /usr/local/share/nmap/scripts/ >/dev/null && 
+                COMPREPLY=( $( cd $NMAPDIR/scripts/ >/dev/null && 
                     compgen -W "$categories all" -G "*.nse" -X "!$cur*" -- $cur ) )
                 fi
                 ;;
@@ -54,7 +55,7 @@ _nmap() {
                 _available_interfaces
                 ;;
             --spoof-mac)
-                COMPREPLY=( $( grep -i "^[^#]..... $cur" /usr/local/share/nmap/nmap-mac-prefixes | cut -d\  -f2 ) )
+                COMPREPLY=( $( grep -i "^[^#]..... $cur" $NMAPDIR/nmap-mac-prefixes | cut -d\  -f2 ) )
                 ;;
             --datadir)
                 _filedir -d

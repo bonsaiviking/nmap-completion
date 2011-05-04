@@ -7,6 +7,7 @@ INSTALLING
 
 Disclaimer: This installation works on Ubuntu. Not sure about other distros.
 
+A. Change NMAPDIR= to your Nmap installed location
 1. Copy the file "nmap" to /etc/bash_completion.d/
 2. Run bash
 3. Profit!
