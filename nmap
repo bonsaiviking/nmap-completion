@@ -30,7 +30,7 @@ _nmap() {
                 _filedir
                 ;;
             +($any_time_opts))
-                COMPREPLY=( $( compgen -W "${cur}s ${cur}m ${cur}h $cur" -- $cur ) )
+                COMPREPLY=( $( compgen -W "${cur}ms ${cur}s ${cur}m ${cur}h $cur" -- $cur ) )
                 ;;
             -T)
                 COMPREPLY=( $( compgen -W "paranoid sneaky polite normal aggressive insane" -- $cur ) )
@@ -39,7 +39,7 @@ _nmap() {
                 COMPREPLY=( $( compgen -W "0 1 2 3 4 5 6 7 8 9" -- $cur ) )
                 ;;
             --script)
-                categories=`perl -ne '$s{$1}=undef if/categories = { "([^"]+)", /gc;$s{$1}=undef while(/\G"([^"]+)", /gc);END{$,=" ";print keys %s}' /usr/local/share/nmap/scripts/script.db`
+                categories=$(perl -ne '$s{$1}=undef if/categories = { "([^"]+)", /gc;$s{$1}=undef while(/\G"([^"]+)", /gc);END{$,=" ";print keys %s}' /usr/local/share/nmap/scripts/script.db)
                 if [[ "$cur" == *,* ]]; then
                 realcur=${cur##*,}
                 prefix=${cur%,*}
