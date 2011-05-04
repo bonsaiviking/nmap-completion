@@ -1,0 +1,16 @@
+nmap-completion
+
+A bash-completion script for Nmap (http://www.nmap.org). Currently supporting
+version 5.51 of Nmap.
+
+INSTALLING
+
+Disclaimer: This installation works on Ubuntu. Not sure about other distros.
+
+1. Copy the file "nmap" to /etc/bash_completion.d/
+2. Run bash
+3. Profit!
+
+AUTHOR
+
+Daniel Miller <bonsaiviking@gmail.com>
