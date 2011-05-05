@@ -44,7 +44,7 @@ _nmap() {
                 ;;
             --script)
                 [ -z "$NMAPDIR" ] && exit 1
-                categories=$(perl -ne '$s{$1}=undef if/categories = { "([^"]+)", /gc;$s{$1}=undef while(/\G"([^"]+)", /gc);END{$,=" ";print keys %s}' $NMAPDIR/scripts/script.db)
+                categories="auth broadcast default discovery dos exploit external fuzzer intrusive malware safe version vuln"
                 if [[ "$cur" == *,* ]]; then
                 realcur=${cur##*,}
                 prefix=${cur%,*}
