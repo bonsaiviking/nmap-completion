@@ -31,7 +31,9 @@ o Completion for -e uses bash-completion's _available_interfaces function, which
 
 o --spoof-mac adds single quotes ('') to complete vendor names, which may be
   confusing, and break in some cases (if the vendor name contains a single
-  quote, for instance). Also, the list of vendor names is quite long. Use with
+  quote, for instance). Also, this interacts poorly with the sudo completion
+  script, rendering it useless (since root privilege is needed to spoof your
+  MAC address). Note that the list of vendor names is quite long. Use with
   caution.
 
 o The --datadir option changes NMAPDIR for Nmap, but the completion script isn't
