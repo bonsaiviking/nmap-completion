@@ -1,17 +1,41 @@
 nmap-completion
 
+https://github.com/bonsaiviking/nmap-completion
+
 A bash-completion script for Nmap (http://www.nmap.org). Currently supporting
 version 5.51 of Nmap.
 
 INSTALLING
 
-Disclaimer: This installation works on Ubuntu. Not sure about other distros.
+This script will work in any location that is "sourced" by Bash on startup.
+Distributions (like Ubuntu) that package bash-completion separately may have a
+directory for these scripts. On Ubuntu, the directory is 
+/etc/bash_completion.d/. In this case, just copy the file ./nmap into that
+directory and restart Bash.
 
-A. Change NMAPDIR= to your Nmap installed location
-1. Copy the file "nmap" to /etc/bash_completion.d/
-2. Run bash
-3. Profit!
+For other distributions, or as a safe fallback, copy the contents of ./nmap
+into your ~/.bashrc file.
 
 AUTHOR
 
 Daniel Miller <bonsaiviking@gmail.com>
+
+KNOWN ISSUES
+
+o Completion for -e uses bash-completion's _available_interfaces function, which
+  uses Perl-style named character classes in an awk script. GNU awk (gawk)
+  handles this just fine, but other awks may not. Specifically, Ubuntu Linux
+  uses mawk to provide awk, which causes this to fail. Bug report for
+  bash-completion under Ubuntu filed at
+  https://bugs.launchpad.net/ubuntu/+source/bash-completion/+bug/778679
+
+o --spoof-mac adds single quotes ('') to complete vendor names, which may be
+  confusing, and break in some cases (if the vendor name contains a single
+  quote, for instance). Also, the list of vendor names is quite long. Use with
+  caution.
+
+o The --datadir option changes NMAPDIR for Nmap, but the completion script isn't
+  smart enough to know about it. Don't expect it to tab-complete script names
+  in odd directories. However, if you export the $NMAPDIR environment variable,
+  both Nmap and nmap-completion will use it properly.
+
