@@ -27,13 +27,11 @@ _nmap() {
     elif [[ "$cur" == -* ]]; then
         COMPREPLY=( $( compgen -W "$all_options $file_opts $time_opts" -- $cur ) )
     else
-        any_file_opts=$(echo $file_opts | sed -e 's/\s\+/|/g')
-        any_time_opts=$(echo $time_opts | sed -e 's/\s\+/|/g')
         case "$prev" in
-            "+($any_file_opts)")
+            +(${file_opts// /|}))
                 _filedir
                 ;;
-            "+($any_time_opts)")
+            +(${time_opts// /|}))
                 COMPREPLY=( $( compgen -W "${cur}ms ${cur}s ${cur}m ${cur}h $cur" -- $cur ) )
                 ;;
             -T)
