@@ -49,12 +49,12 @@ _nmap() {
                 COMPREPLY=( $( cd "$NMAPDIR/scripts/" 2>/dev/null &&
                     compgen -W "$categories all" -G "*.nse" -X "!$realcur*" -P "$prefix," -- $realcur )
                     $( cd ~/.nmap/scripts/ 2>/dev/null &&
-                    compgen -G "*.nse" -- $realcur ) )
+                    compgen -G "*.nse" -X "!$cur*" -- $realcur ) )
                 else
                 COMPREPLY=( $( cd "$NMAPDIR/scripts/" 2>/dev/null &&
                     compgen -W "$categories all" -G "*.nse" -X "!$cur*" -- $cur )
                     $( cd ~/.nmap/scripts/ 2>/dev/null &&
-                    compgen -G "*.nse" -- $cur ) )
+                    compgen -G "*.nse" -X "!$cur*" -- $cur ) )
                 fi
                 ;;
             -e)
