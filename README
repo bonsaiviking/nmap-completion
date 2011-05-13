@@ -5,6 +5,14 @@ https://github.com/bonsaiviking/nmap-completion
 A bash-completion script for Nmap (http://www.nmap.org). Currently supporting
 version 5.51 of Nmap.
 
+FEATURES
+
+* tab-complete options with both short and long versions
+* tab-complete time options with h, m, s, ms
+* tab-complete script names and categories
+* tab-complete timing options with names: "paranoid," "insane," etc.
+* tab-complete interface names for -e
+
 INSTALLING
 
 This script will work in any location that is "sourced" by Bash on startup.
@@ -13,8 +21,13 @@ directory for these scripts. On Ubuntu, the directory is
 /etc/bash_completion.d/. In this case, just copy the file ./nmap into that
 directory and restart Bash.
 
+If you have problems, check that /etc/bash_completion is sourced from your
+~/.bashrc or /etc/bash.bashrc. On Backtrack, for instance, the code for this
+is commented out.
+
 For other distributions, or as a safe fallback, copy the contents of ./nmap
-into your ~/.bashrc file.
+into your ~/.bashrc file. Some features (like -e interface name completion) may
+not work with this method.
 
 AUTHOR
 
