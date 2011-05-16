@@ -32,7 +32,8 @@ _nmap() {
                 _filedir
                 ;;
             +(${time_opts// /|}))
-                COMPREPLY=( $( compgen -W "${cur}ms ${cur}s ${cur}m ${cur}h $cur" -- $cur ) )
+                local digits=${cur%%+([msh])}
+                COMPREPLY=( $( compgen -W "${digits}ms ${digits}s ${digits}m ${digits}h $digits" -- $cur ) )
                 ;;
             -T)
                 COMPREPLY=( $( compgen -W "paranoid sneaky polite normal aggressive insane" -- $cur ) )
