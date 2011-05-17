@@ -7,11 +7,20 @@ version 5.51 of Nmap.
 
 FEATURES
 
+* tab-complete preferred arguments to options (via ~/.nmap/prefs file)
 * tab-complete options with both short and long versions
 * tab-complete time options with h, m, s, ms
 * tab-complete script names and categories
 * tab-complete timing options with names: "paranoid," "insane," etc.
 * tab-complete interface names for -e
+
+PREFERRED ARGUMENTS
+
+For options that require arguments (see the pref_opts variable), nmap-completion
+will look in ~/.nmap/prefs for a line that starts with that option and will
+generate completions from the arguments that follow it. The lines should follow
+basic shell quoting syntax, e.g. argument1 "argument 2 w/spaces" 'argument "3"'.
+See the included "prefs" file for examples.
 
 INSTALLING
 
@@ -35,8 +44,14 @@ Daniel Miller <bonsaiviking@gmail.com>
 
 KNOWN ISSUES
 
+o Preferred-argument completion uses a hacky combination of eval, Bash arrays,
+  and quote escaping that works in most cases, but breaks in some. In general,
+  I don't know how to fix the problems you will encounter, but I would greatly
+  appreciate (and give proper credit to) any suggestions for making it cleaner
+  or less buggy.
+
 o Completion for -e uses bash-completion's _available_interfaces function, which
-  uses Perl-style named character classes in an awk script. GNU awk (gawk)
+  uses POSIX named character classes in an awk script. GNU awk (gawk)
   handles this just fine, but other awks may not. Specifically, Ubuntu Linux
   uses mawk to provide awk, which causes this to fail. Bug report for
   bash-completion under Ubuntu filed at

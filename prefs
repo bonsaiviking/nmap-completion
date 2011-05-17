@@ -1,0 +1,12 @@
+--servicedb /etc/services
+--max-os-tries 1
+--max-rtt-timeout 100ms
+--exclude 192.168.1.30,192.168.1.1
+--host-timeout 30m
+--max-retries 0
+-iR 0 1000 50000
+-g 53 88 67
+--top-ports 100
+--script '(default or safe) and not (intrusive or external or broadcast)'
+--script-args smbuser=test,smbpass=test,smbtype=v2 'http.useragent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)"'
+--stats-every 10s
