@@ -5,7 +5,7 @@ _nmap() {
 
     COMPREPLY=()
     local cur prev
-    cur=${COMP_WORDS[COMP_CWORD]}
+    cur=$(_get_cword)
     prev=${COMP_WORDS[COMP_CWORD-1]}
     if [ -z "$NMAPDIR" ]; then
         [ -d /usr/share/nmap ] && NMAPDIR=/usr/share/nmap
