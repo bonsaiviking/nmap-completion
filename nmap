@@ -1,11 +1,33 @@
 # nmap bash completion file
 # by Daniel Miller 
+_escape_compreply() {
+    local IFS=$'\n'
+    local i=0
+    local entry
+    for entry in ${COMPREPLY[*]}
+    do
+        if [[ "${cur:0:1}" == "'" ]]
+        then
+            COMPREPLY[$i]="${entry//\'/\'\\\'\'}"
+        elif [[ "${cur:0:1}" == '"' ]]
+        then
+            entry="${entry//\\/\\\\}"
+            COMPREPLY[$i]="${entry//\"/\\\"}" #"comment
+        else
+            entry="${entry//\\/\\\\}"
+            entry="${entry//\'/\'}"
+            entry="${entry//\"/\\\"}"
+            COMPREPLY[$i]="${entry// /\\ }"
+        fi
+        (( i++ ))
+    done
+}
 
 _nmap() {
 
     COMPREPLY=()
     local cur prev
-    cur=$(_get_cword)
+    cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
     if [ -z "$NMAPDIR" ]; then
         [ -d /usr/share/nmap ] && NMAPDIR=/usr/share/nmap
@@ -74,32 +96,11 @@ _nmap() {
             +(${pref_opts// /|}))
                 # Credit to Eugene on Stack Overflow for the general idea here
                 # http://stackoverflow.com/questions/1146098/properly-handling-spaces-and-quotes-in-bash-completion
-                # Still hackish and sucky (doesn't handle single quotes well)
-                # Please send me any improvements!
-                search=$(eval echo "$prev" 2>/dev/null || eval echo "$prev'" 2>/dev/null || eval echo "$prev\"" 2>/dev/null || "")
                 local -a prefs=()
-                argstring=$( awk "/^$search /{\$1=\"\"; print}" ~/.nmap/prefs )
-                eval "prefs=( $argstring )"
+                eval "prefs=( $( awk "/^$prev /{\$1=\"\"; print}" ~/.nmap/prefs ) ) "
                 local IFS=$'\n'
-                local i=0
-                for entry in ${prefs[*]}
-                do
-                    if [[ "${cur:0:1}" == "'" ]]
-                    then
-                        prefs[$i]="${entry//\'/\'\\\'\'}"
-                    elif [[ "${cur:0:1}" == '"' ]]
-                    then
-                        entry="${entry//\\/\\\\}"
-                        prefs[$i]="${entry//\"/\\\"}" #"comment
-                    else
-                        entry="${entry//\\/\\\\}"
-                        entry="${entry//\'/\'}"
-                        entry="${entry//\"/\\\"}"
-                        prefs[$i]="${entry// /\\ }"
-                    fi
-                    (( i++ ))
-                done
-                COMPREPLY=( ${COMPREPLY[@]} $( compgen -W "${prefs[*]}" -- "$cur" ) )
+                COMPREPLY=( $( compgen -W "${prefs[*]}" -- "$cur" ) )
+                _escape_compreply
                 ;;&
             *)
                 return 0
@@ -109,5 +110,56 @@ _nmap() {
     return 0
 }
 
+_zenmap() {
+    COMPREPLY=()
+    local cur prev
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    local short_opts long_opts
+    short_opts="-f -h -n -p -t -v"
+    long_opts="--file --help --nmap --profile --target --verbose"
+
+    local offset i
+    offset=0
+    for (( i=1; i <= COMP_CWORD; i++ )); do
+        if [[ "${COMP_WORDS[i]}" == --nmap ]]; then
+            offset=$i
+            break
+        fi
+    done
+
+    if [[ $offset -gt 0 ]]; then
+        if [[ ${#COMP_WORDS[@]} -ge $(( 2 + offset )) ]]; then
+            _nmap nmap "${COMP_WORDS[${#COMP_WORDS[@]}-1]}" "${COMP_WORDS[${#COMP_WORDS[@]}-2]}"
+        else
+            _nmap nmap "${COMP_WORDS[${#COMP_WORDS[@]}-1]}"
+        fi
+        return 0
+    else
+        if [[ "$cur" == - ]]; then
+            COMPREPLY=( $( compgen -W "$short_opts" -- "$cur" ) )
+        elif [[ "$cur" == -* ]]; then
+            COMPREPLY=( $( compgen -W "$short_opts $long_opts" -- "$cur" ) )
+        else
+            case "$prev" in
+                -f|--file)
+                    _filedir
+                    return 0
+                    ;;
+                -p|--profile)
+                    local IFS=$'\n'
+                    COMPREPLY=( $( compgen -W \
+                        "$( awk -F'[][]' '/^\[/{print $2}' ~/.zenmap/scan_profile.usp )" \
+                        -- "$cur" ) )
+                    _escape_compreply
+                    return 0
+                    ;;
+            esac
+        fi
+    fi
+}
+
 complete -F _nmap -o default nmap
+complete -F _zenmap -o default zenmap
 # vi:ft=sh

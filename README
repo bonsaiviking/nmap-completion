@@ -3,7 +3,7 @@ nmap-completion
 https://github.com/bonsaiviking/nmap-completion
 
 A bash-completion script for Nmap (http://www.nmap.org). Currently supporting
-version 5.51 of Nmap.
+version 5.51 of Nmap and Zenmap.
 
 FEATURES
 
@@ -44,11 +44,12 @@ Daniel Miller <bonsaiviking@gmail.com>
 
 KNOWN ISSUES
 
-o Preferred-argument completion uses a hacky combination of eval, Bash arrays,
-  and quote escaping that works in most cases, but breaks in some. In general,
-  I don't know how to fix the problems you will encounter, but I would greatly
-  appreciate (and give proper credit to) any suggestions for making it cleaner
-  or less buggy.
+o Don't let anyone edit your ~/.nmap/prefs file. Contents of the file are
+  directly eval'd, which could be considered a security issue. For example,
+  change your prefs file to contain this line:
+  -g ); cat /etc/passwd #
+  Now whenever you hit tab after -g, you'll see the contents of your
+  /etc/passwd file. Keep it safe, and pay attention to what you put in there.
 
 o Completion for -e uses bash-completion's _available_interfaces function, which
   uses POSIX named character classes in an awk script. GNU awk (gawk)
