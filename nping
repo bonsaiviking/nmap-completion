@@ -1,0 +1,42 @@
+# bash completion for Nping
+
+_nping() {
+    COMPREPLY=()
+    local cur prev
+    cur=$(_get_cword)
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    local short_opts all_opts time_opts
+    short_opts="--tcp --udp --icmp --arp --traceroute -p -S -g -6 --data --ec --es --ep -h -V -c -e -H -N -v -q -d"
+    all_opts=$( echo --tcp-connect --tcp --udp --icmp --arp --traceroute -p \
+        --{dest,source}-{port,ip,mac} -S -g --seq --flags --win --badsum{,-ip} \
+        --icmp-{type,code,id,seq,redirect-addr,param-pointer,advert-{lifetime,entry},{orig,trans}-time} \
+        --arp-{type,{sender,target}-{mac,ip}} \
+        --tos --id --df --md --ttl --ip-options --mtu -6 --ipv6 --flow \
+        --traffic-class --hop-limit --ether-type --data{,-string,-length,} \
+        --ec --es --ep --echo-{client,server,port} --nc --no-crypto --once \
+        --delay --rate -h --help -V --version -c --count -e --interface \
+        --{un,}privileged --send-{eth,ip} --{bpf-,}filter -H --hide-sent \
+        -N --no-capture -v --verbose -q --reduce-verbosity -d )
+    time_opts="--delay"
+
+    if [[ "$cur" == - ]]; then
+        COMPREPLY=( $( compgen -W "$short_opts" -- $cur ) )
+    elif [[ "$cur" == -* ]]; then
+        COMPREPLY=( $( compgen -W "$all_opts" -- $cur ) )
+    else
+        case "$prev" in
+            +(${time_opts// /|}))
+                local digits=${cur%%+([msh])}
+                COMPREPLY=( $( compgen -W "${digits}ms ${digits}s ${digits}m ${digits}h $digits" -- "$cur" ) )
+                ;;
+            *)
+                return 0
+                ;;
+        esac
+    fi
+    return 0
+}
+
+complete -F _nping -o default nping
+# vim:ft=sh
