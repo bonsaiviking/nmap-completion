@@ -1,0 +1,21 @@
+# bash completion for Ncat
+
+_ndiff() {
+    COMPREPLY=()
+    local cur prev
+    cur=$(_get_cword)
+
+    local common_opts all_opts
+    common_opts="-h -v --text --xml"
+    all_opts="-h --help -v --verbose --text --xml"
+
+    if [[ "$cur" == - ]]; then
+        COMPREPLY=( $( compgen -W "$common_opts" -- $cur ) )
+    elif [[ "$cur" == -* ]]; then
+        COMPREPLY=( $( compgen -W "$all_opts" -- $cur ) )
+    fi
+    return 0
+}
+
+complete -F _ndiff -o default ndiff
+# vim:ft=sh
