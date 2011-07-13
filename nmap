@@ -99,7 +99,7 @@ _nmap() {
                 local -a prefs=()
                 eval "prefs=( $( awk "/^$prev /{\$1=\"\"; print}" ~/.nmap/prefs ) ) "
                 local IFS=$'\n'
-                COMPREPLY=( $( compgen -W "${prefs[*]}" -- "$cur" ) )
+                COMPREPLY+=( $( compgen -W "${prefs[*]}" -- "$cur" ) )
                 _escape_compreply
                 ;;&
             *)
