@@ -96,11 +96,13 @@ _nmap() {
             +(${pref_opts// /|}))
                 # Credit to Eugene on Stack Overflow for the general idea here
                 # http://stackoverflow.com/questions/1146098/properly-handling-spaces-and-quotes-in-bash-completion
-                local -a prefs=()
-                eval "prefs=( $( awk "/^$prev /{\$1=\"\"; print}" ~/.nmap/prefs ) ) "
-                local IFS=$'\n'
-                COMPREPLY+=( $( compgen -W "${prefs[*]}" -- "$cur" ) )
-                _escape_compreply
+                if [ -f ~/.nmap/prefs ]; then
+                    local -a prefs=()
+                    eval "prefs=( $( awk "/^$prev /{\$1=\"\"; print}" ~/.nmap/prefs ) ) "
+                    local IFS=$'\n'
+                    COMPREPLY+=( $( compgen -W "${prefs[*]}" -- "$cur" ) )
+                    _escape_compreply
+                fi
                 ;;&
             *)
                 return 0
