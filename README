@@ -8,6 +8,7 @@ version 5.51 of Nmap and Zenmap.
 FEATURES
 
 * tab-complete options for nmap, zenmap, ncat, nping, and ndiff
+* Help text for Nmap scan, ping, input, and output types
 * tab-complete preferred arguments to options (via ~/.nmap/prefs file)
 * tab-complete options with both short and long versions
 * tab-complete time options with h, m, s, ms
