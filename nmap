@@ -34,7 +34,61 @@ _nmap() {
         [ -d /usr/local/share/nmap ] && NMAPDIR=/usr/local/share/nmap
     fi
 
-    common_options="-6 -A -b -d -D -e -f -F -g --help -i[INPUT_TARGETS] -M -n -O -o[OUTPUT_TYPE] --open -P[PING_TYPE] -p[PORTS] -r -R --randomize-hosts --reason -S --script -s[SCAN_TECHNIQUES] --top-ports --traceroute -T[TIMING] -V -v --version --version-all --version-light"
+    common_options="-b -D -f -g -M -r -R -S -V (other 1-letter options)
+-6 (IPv6 scan)
+-A (-O -sV -sC --traceroute)
+-d (debug mode)
+-e <iface> (Use specified interface)
+-F (Scan top 100 ports)
+--help (Print help and exit)
+-i[INPUT_TARGETS] (Alternative target specification)
+-n (No DNS resolution)
+-O (OS detection)
+-o[OUTPUT_TYPE] (Output to file)
+--open (Show open ports only)
+-P[PING_TYPE] (Host discovery type)
+-p[PORTS] (Ports to scan)
+--reason (Show why port is open/closed)
+--script <NSE scripts> (run these scripts)
+-s[SCAN_TECHNIQUES] (Scan type to use)
+--top-ports <number> (Scan <number> most common ports)
+--traceroute (Do traceroute on targets)
+-T[TIMING] (Timing templates)
+-v (Be verbose)
+--version (Show version and exit)"
+    ping_types="-Pn (skip host discovery)
+-PS[portlist] (TCP SYN)
+-PA[portlist] (TCP ACK)
+-PU[portlist] (UDP)
+-PY[portlist] (SCTP)
+-PE (ICMP echo)
+-PP (ICMP timestamp)
+-PM (ICMP netmask)
+-PO[protocol list] (IP Protocol)"
+    scan_types="-sL (List only)
+-sS (TCP SYN)
+-sT (TCP Connect)
+-sA (TCP ACK)
+-sW (TCP Window)
+-sM (TCP Maimon)
+-sU (UDP)
+-sN (TCP Null)
+-sF (TCP FIN)
+-sX (TCP Xmas)
+-sI <zombie host[:probeport]> (Idle scan)
+-sY (SCTP INIT)
+-sZ (SCTP COOKIE-ECHO)
+-sO (IP Protocol)
+-sV (Version scan)
+-sC (--script=default)
+-sn (skip port scan)"
+    input_types="-iL <inputfilename> (Input from list of hosts/networks)
+-iR <num hosts> (Choose random targets)"
+    output_types="-oA <basename> (Normal, XML, and Grepable, auto-add extension)
+-oN <file> (Normal output)
+-oX <file> (XML output)
+-oS <file> (s|<rIpt kIddi3)
+-oG <file> (Grepable output)"
     all_options="-6 -A --adler32 --allports --append-output -b --badsum -d -D --datadir --data-length --debug --defeat-rst-ratelimit --dns-servers -e --exclude -f --ff -F -g --help --iflist --ip-options -iR --log-errors -M --max-hostgroup --max-os-tries --max-parallelism --max-rate --max-retries --min-hostgroup --min-parallelism --min-rate --mtu -n --nogcc --no-stylesheet -O -oA -oG -oN --open -oS --osscan-guess --osscan-limit -oX -p -PA --packet-trace -PE -PM -Pn -PO --port-ratio -PP -p --privileged -PS -PU -PY -r -R --randomize-hosts --reason --release-memory -S -sA -sC --scanflags --script --script-args --script-help --script-trace --script-updatedb --send-eth --send-ip -sF -sI -sL -sM -sn -sN -sO --source-port --spoof-mac -sR -sS -sT -sU -sV -sW -sX -sY --system-dns -sZ -T --timing --top-ports --traceroute --ttl --unprivileged -V -v --verbose --version --version-all --version-intensity --version-light --version-trace --webxml" 
     file_opts="-iL --excludefile --resume --stylesheet --servicedb --versiondb --script-args-file"
     time_opts="--min-rtt-timeout --max-rtt-timeout --initial-rtt-timeout --host-timeout --scan-delay --max-scan-delay --stats-every" 
@@ -42,11 +96,24 @@ _nmap() {
 
     if [[ "$cur" == - ]]; then
         # Don't overwhelm the casual user.
-        # Only show single-letter and common options
+        # Only show common options
+        local IFS=$'\n'
         COMPREPLY=( $( compgen -W "$common_options" -- $cur ) )
-    elif [[ "$cur" == -P+(S|Y|A|U|O) ]]; then
+    elif [[ "$cur" == -P ]]; then
+        local IFS=$'\n'
+        COMPREPLY=( $( compgen -W "$ping_types" -- "$cur" ) )
+    elif [[ "$cur" == -P@(S|Y|A|U|O) ]]; then
         # Cannot have space between these pings and port list
         COMPREPLY=( $( compgen -P "$cur" -- $cur ) )
+    elif [[ "$cur" == -s ]]; then
+        local IFS=$'\n'
+        COMPREPLY=( $( compgen -W "$scan_types" -- "$cur" ) )
+    elif [[ "$cur" == -i ]]; then
+        local IFS=$'\n'
+        COMPREPLY=( $( compgen -W "$input_types" -- "$cur" ) )
+    elif [[ "$cur" == -o ]]; then
+        local IFS=$'\n'
+        COMPREPLY=( $( compgen -W "$output_types" -- "$cur" ) )
     elif [[ "$cur" == -* ]]; then
         COMPREPLY=( $( compgen -W "$all_options $file_opts $time_opts" -- $cur ) )
     else
