@@ -10,8 +10,8 @@ _ncat() {
     # These options are short-option-only, are the same as traditional netcat
     # or are commonly used and helpful (e.g. --help)
     common_opts="-4 -6 -C -e -g -G -p -s -l -k -n -t -u -v -w --help --proxy --ssl --version"
-    all_opts="-4 -6 -C --crlf -c --sh-exec -e --exec -g -G -m --max-conns -h --help -d --delay -o --output -x --hex-dump -i --idle-timeout -p --source-port -s --source -l --listen -k --keep-open -n --nodns -t --telnet -u --udp --sctp -v -vv -vvv --verbose -w --wait --send-only --recv-only --allow --allowfile --deny --denyfile --broker --chat --proxy --proxy-type --proxy-auth --ssl --ssl-cert --ssl-key --ssl-verify --ssl-trustfile --version"
-    file_opts="-o --output -x --hex-dump --allowfile --denyfile --ssl-cert --ssl-key --ssl-trustfile"
+    all_opts="-4 -6 -C --crlf -c --sh-exec -e --exec -g -G -m --max-conns -h --help -d --delay -o --output -x --hex-dump -i --idle-timeout -p --source-port -s --source -l --listen -k --keep-open -n --nodns -t --telnet -u --udp --sctp -v -vv -vvv --verbose -w --wait --send-only --recv-only --allow --allowfile --deny --denyfile --broker --chat --proxy --proxy-type --proxy-auth --ssl --ssl-cert --ssl-key --ssl-verify --ssl-trustfile --version --unixsock --append-output"
+    file_opts="-o --output -x --hex-dump --allowfile --denyfile --ssl-cert --ssl-key --ssl-trustfile --lua-exec"
     time_opts="-d --delay -i --idle-timeout -w --wait"
 
     if [[ "$cur" == - ]]; then
