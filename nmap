@@ -132,13 +132,13 @@ _nmap() {
             --spoof-mac)
                 [ -z "$NMAPDIR" ] && exit 1
                 local IFS=$'\n'
-                local realcur=${cur#[\'\"]}
+                local realcur=${cur#[\'\"]} # comment for syntax highlighting'
                 COMPREPLY=( $( compgen -W "$( grep -i "^[^#]..... $realcur" $NMAPDIR/nmap-mac-prefixes | cut -d\  -f2- )" -X "!$realcur*" -P "'" -S "'" -- $realcur ) )
                 ;;
             --script|--script-help)
-                [ -z "$NMAPDIR" ] && exit 1
+                [ -z "$NMAPDIR" ] && exit 1 #[comment
                 categories="auth broadcast default discovery dos exploit external fuzzer intrusive malware safe version vuln"
-                if [[ "$cur" == *,* ]]; then
+                if [[ "$cur" == *,* ]]; then #[comment
                     local realcur=${cur##*,}
                     local prefix=${cur%,*}
                     COMPREPLY=( $( cd "$NMAPDIR/scripts/" 2>/dev/null &&
@@ -165,7 +165,7 @@ _nmap() {
             +(${pref_opts// /|}))
                 # Credit to Eugene on Stack Overflow for the general idea here
                 # http://stackoverflow.com/questions/1146098/properly-handling-spaces-and-quotes-in-bash-completion
-                if [ -f ~/.nmap/prefs ]; then
+                if [ -f ~/.nmap/prefs ]; then #[comment
                     local -a prefs=()
                     eval "prefs=( $( awk "/^$prev /{\$1=\"\"; print}" ~/.nmap/prefs ) ) "
                     local IFS=$'\n'
@@ -194,23 +194,23 @@ _zenmap() {
     local offset i
     offset=0
     for (( i=1; i <= COMP_CWORD; i++ )); do
-        if [[ "${COMP_WORDS[i]}" == --nmap ]]; then
+        if [[ "${COMP_WORDS[i]}" == --nmap ]]; then #[comment
             offset=$i
             break
         fi
     done
 
-    if [[ $offset -gt 0 ]]; then
-        if [[ ${#COMP_WORDS[@]} -ge $(( 2 + offset )) ]]; then
+    if [[ $offset -gt 0 ]]; then #[comment
+        if [[ ${#COMP_WORDS[@]} -ge $(( 2 + offset )) ]]; then #[comment
             _nmap nmap "${COMP_WORDS[${#COMP_WORDS[@]}-1]}" "${COMP_WORDS[${#COMP_WORDS[@]}-2]}"
         else
             _nmap nmap "${COMP_WORDS[${#COMP_WORDS[@]}-1]}"
         fi
         return 0
     else
-        if [[ "$cur" == - ]]; then
+        if [[ "$cur" == - ]]; then #[comment
             COMPREPLY=( $( compgen -W "$short_opts" -- "$cur" ) )
-        elif [[ "$cur" == -* ]]; then
+        elif [[ "$cur" == -* ]]; then #[comment
             COMPREPLY=( $( compgen -W "$short_opts $long_opts" -- "$cur" ) )
         else
             case "$prev" in
