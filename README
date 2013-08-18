@@ -3,7 +3,7 @@ nmap-completion
 https://github.com/bonsaiviking/nmap-completion
 
 A bash-completion script for Nmap (http://www.nmap.org). Currently supporting
-version 5.51 of Nmap and Zenmap.
+version 6.40 of Nmap and Zenmap.
 
 FEATURES
 
