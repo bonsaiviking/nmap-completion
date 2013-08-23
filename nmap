@@ -65,7 +65,8 @@ _nmap() {
 -PP (ICMP timestamp)
 -PM (ICMP netmask)
 -PO[protocol list] (IP Protocol)"
-    scan_types="-sS (TCP SYN)
+    scan_types="-sL (List only)
+-sS (TCP SYN)
 -sT (TCP Connect)
 -sA (TCP ACK)
 -sW (TCP Window)
