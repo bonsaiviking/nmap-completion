@@ -152,6 +152,20 @@ _nmap() {
                     $( cd ~/.nmap/scripts/ 2>/dev/null &&
                         compgen -G "*.nse" -X "!$cur*" -- $cur ) )
                 fi
+                ;;
+            --script-args)
+                [ -z "$NMAPDIR" ] && exit 1
+                local script_name=`echo ${COMP_WORDS[*]} | grep -Po -- '--script \K[-_[:alnum:]]*'`
+                if [ -f "$NMAPDIR/scripts/$script_name.nse" ]; then
+                    # Load the script arguments from the db file
+                    IFS=$'\n' read -d '' -r -a lines < "$NMAPDIR/scripts/script-args.db"
+                    for ((i=0; i<${#lines[@]}; i++)); do
+                        if [ ${lines[i]%:*} == ${script_name} ]; then
+                            break;
+                        fi;
+                    done
+                    COMPREPLY=($( compgen -W  "${lines[i]#*:}" -- "$cur" ))
+                fi
                 ;;&
             +(${file_opts// /|}))
                 _filedir
