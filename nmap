@@ -152,6 +152,17 @@ _nmap() {
                     $( cd ~/.nmap/scripts/ 2>/dev/null &&
                         compgen -G "*.nse" -X "!$cur*" -- $cur ) )
                 fi
+                ;;
+            --script-args)
+                [ -z "$NMAPDIR" ] && exit 1
+                local script_name=`echo ${COMP_WORDS[*]} | grep -Po -- '--script \K[-_[:alnum:]]*'`
+                if [ -f "$NMAPDIR/scripts/$script_name.nse" ]; then
+                    # Many folders will be created inside the script-args directory
+                    # when script.sh is executed and we use those files to complete the
+                    # --script-args option
+                    COMPREPLY=( $( cd "$NMAPDIR/scripts/script-args/$script_name/" 2>/dev/null &&
+                        compgen -G "*" -X "!$cur*" -- $cur ) )
+                fi
                 ;;&
             +(${file_opts// /|}))
                 _filedir
