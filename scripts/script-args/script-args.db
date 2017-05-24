@@ -1,0 +1,183 @@
+acarsd-info: acarsd-info.timeout acarsd-info.bytes
+ajp-auth: ajp-auth.path
+asn-query: dns
+backorifice-brute: backorifice-brute.ports
+backorifice-info: backorifice-info.password backorifice-info.seed
+bitcoinrpc-info: creds.global=<user>:<pass>
+bittorrent-discovery: bittorrent-discovery.torrent bittorrent-discovery.magnet bittorrent-discovery.timeout bittorrent-discovery.include-nodes
+broadcast-dropbox-listener: newtargets
+broadcast-igmp-discovery: interface mgroupnamesdb timeout version
+broadcast-ms-sql-discover: newtargets
+broadcast-pim-discovery: broadcast-pim-discovery.timeout
+broadcast-ping: broadcast-ping.timeout broadcast-ping.num-probes
+broadcast-wake-on-lan: broadcast-wake-on-lan.MAC broadcast-wake-on-lan.address
+cics-enum: cics-enum.commands cics-enum.path cics-enum.user cics-enum.pass cics-enum.noSSL(bool) idlist
+cics-info: cics-info.commands cics-info.cemt cics-info.user cics-info.pass cics-info.trans
+cics-user-brute: cics-user-brute.commands userdb
+cics-user-enum: userdb cics-user-enum.commands
+citrix-brute-xml: citrix-brute-xml.userdb citrix-brute-xml.passdb citrix-brute-xml.ntdomain
+clamav-exec: clamav-exec.cmd clamav-exec.scandb
+distcc-exec: distcc-exec.cmd
+dns-blacklist: dns-blacklist.ip dns-blacklist.mode dns-blacklist.list dns-blacklist.services dns-blacklist.category
+dns-brute: dns-brute.domain dns-brute.hostlist dns-brute.threads dns-brute.srv dns-brute.srvlist
+dns-cache-snoop: dns-cache-snoop.mode dns-cache-snoop.domains
+dns-check-zone: dns-check-zone.domain
+dns-client-subnet-scan: dns-client-subnet-scan.domain dns-client-subnet-scan.address dns-client-subnet-scan.mask dns-client-subnet-scan.nameserver
+dns-fuzz: dns-fuzz.timelimit
+dns-ip6-arpa-scan: dns-ip6-arpa-scan.prefix dns-ip6-arpa-scan.mask
+dns-nsec3-enum: dns-nsec3-enum.domains dns-nsec3-enum.timelimit
+dns-nsec-enum.nse: dns-nsec-enum.nse.domains
+dns-srv-enum: dns-srv-enum.domain dns-srv-enum.filter
+dns-update: dns-update.hostname dns-update.ip dns-update.test
+dns-zone-transfer: dns-zone-transfer.domain dns-zone-transfer.server dns-zone-transfer.port dns-zone-transfer.addall newtargets
+domcon-cmd: domcon-cmd.cmd domcon-cmd.user domcon-cmd.pass
+drda-brute: drda-brute.threads drda-brute.dbname
+eap-info: eap-info.identity eap-info.scan eap-info.interface eap-info.timeout
+firewalk: firewalk.max-retries firewalk.probe-timeout firewalk.max-probed-ports firewalk.recv-timeout firewalk.max-active-probes
+firewall-bypass: firewall-bypass.helper firewall-bypass.helperport firewall-bypass.targetport
+ftp-anon: ftp-anon.maxlist
+ganglia-info: ganglia-info.timeout ganglia-info.bytes
+gopher-ls: gopher-ls.maxfiles
+hadoop-jobtracker-info: hadoop-jobtracker-info.userinfo
+hostmap-bfk: hostmap-bfk.prefix
+hostmap-ip2hosts: hostmap-ip2hosts.prefix
+http-adobe-coldfusion-apsa1301: http-adobe-coldfusion-apsa1301.basepath
+http-affiliate-id: http-affiliate-id.url-path
+http-apache-negotiation: http-apache-negotiation.root
+http-aspnet-debug: http-aspnet-debug.path
+http-auth: http-auth.path
+http-awstatstotals-exec: http-awstatstotals-exec.uri http-awstatstotals-exec.cmd http-awstatstotals-exec.outfile http.useragent
+http-axis2-dir-traversal: http-axis2-dir-traversal.file http-axis2-dir-traversal.outfile http-axis2-dir-traversal.basepath
+http-barracuda-dir-traversal: http-max-cache-size
+http-coldfusion-subzero: http-coldfusion-subzero.basepath
+http-cross-domain-policy: http-cross-domain-policy.domain-lookup
+http-domino-enum-passwords: http-domino-enum-passwords.path http-domino-enum-passwords.hostname http-domino-enum-passwords.count http-domino-enum-passwords.idpath http-domino-enum-passwords.username http-domino-enum-passwords.password
+http-drupal-enum.nse: http-drupal-enum.root http-drupal-enum.number http-drupal-enum.modules_path http-drupal-enum.themes_path http-drupal-enum.type
+http-drupal-enum-users: http-drupal-enum-users.root
+http-favicon: favicon.uri favicon.root
+http-fetch: http-fetch.destination http-fetch.files http-fetch.url http-fetch.paths http-fetch.maxdepth http-fetch.maxpagecount http-fetch.noblacklist http-fetch.withinhost http-fetch.withindomain
+http-form-fuzzer: http-form-fuzzer.targets http-form-fuzzer.minlength http-form-fuzzer.maxlength
+http-generator: http-generator.path http-generator.redirects
+http-grep: http-grep.match http-grep.maxdepth http-grep.maxpagecount http-grep.url http-grep.withinhost http-grep.withindomain http-grep.breakonmatch http-grep.builtins
+http-icloud-findmyiphone: http-icloud-findmyiphone.username http-icloud-findmyiphone.password
+http-icloud-sendmsg: http-icloud-sendmsg.username http-icloud-sendmsg.password http-icloud-sendmsg.listdevices http-icloud-sendmsg.deviceindex http-icloud-sendmsg.subject http-icloud-sendmsg.message http-icloud-sendmsg.sound
+http-iis-webdav-vuln: webdavfolder folderdb basefolder
+http-internal-ip-disclosure: http-internal-ip-disclosure.path
+http-joomla-brute: http-joomla-brute.uri http-joomla-brute.hostname http-joomla-brute.uservar http-joomla-brute.passvar http-joomla-brute.threads http.useragent brute.firstonly brute.mode passdb userdb
+http-litespeed-sourcecode-download: http-litespeed-sourcecode-download.uri
+http-methods: http-methods.url-path http-methods.retest http-methods.test-all
+http-method-tamper: http-method-tamper.uri http-method-tamper.paths http-method-tamper.timeout
+http-ntlm-info: http-ntlm-info.root
+http-open-proxy: proxy.url proxy.pattern
+http-passwd: http-passwd.root
+http-phpmyadmin-dir-traversal: http-phpmyadmin-dir-traversal.file http-phpmyadmin-dir-traversal.outfile http-phpmyadmin-dir-traversal.dir
+http-put: http-put.file http-put.url
+http-robtex-reverse-ip: http-robtex-reverse-ip.host
+http-shellshock: http-shellshock.uri http-shellshock.header http-shellshock.cmd
+http-tplink-dir-traversal: http-tplink-dir-traversal.rfile http-tplink-dir-traversal.outfile http.useragent
+http-virustotal: http-virustotal.apikey http-virustotal.upload http-virustotal.filename http-virustotal.checksum
+http-vuln-cve2006-3392: http-vuln-cve2006-3392.file
+http-vuln-cve2009-3960: http-vuln-cve2009-3960.root http-vuln-cve2009-3960.readfile
+http-vuln-cve2010-0738: http-vuln-cve2010-0738.paths
+http-vuln-cve2011-3192: http-vuln-cve2011-3192.hostname http-vuln-cve2011-3192.path
+http-vuln-cve2012-1823: http-vuln-cve2012-1823.uri http-vuln-cve2012-1823.cmd
+http-vuln-cve2013-0156: http-vuln-cve2013-0156.uri
+http-vuln-cve2014-3704: http-vuln-cve2014-3704.cmd http-vuln-cve2014-3704.uri http-vuln-cve2014-3704.cleanup
+http-vuln-cve2014-8877: http-vuln-cve2014-8877.uri http-vuln-cve2014-8877.cmd
+http-vuln-cve2015-1427: http-vuln-cve2015-1427.command http-vuln-cve2015-1427.invasive
+http-vuln-cve2015-1635: http-vuln-cve2015-1635.uri
+http-waf-detect: http-waf-detect.uri http-waf-detect.aggro http-waf-detect.detectBodyChanges
+http-waf-fingerprint: http-waf-fingerprint.root http-waf-fingerprint.intensive
+http-wordpress-brute: http-wordpress-brute.uri http-wordpress-brute.hostname http-wordpress-brute.uservar http-wordpress-brute.passvar http-wordpress-brute.threads http.useragent brute.firstonly brute.mode passdb userdb
+http-wordpress-enum: http-wordpress-enum.root http-wordpress-enum.search-limit http-wordpress-enum.type http-wordpress-enum.check-latest
+http-wordpress-users: http-wordpress-users.limit http-wordpress-users.basepath http-wordpress-users.out
+informix-query: informix-query.username informix-query.password informix-query.database informix-query.query informix-query.instance
+informix-tables: informix-tables.username informix-tables.password
+ip-forwarding: ip-forwarding.target
+ip-geolocation-ipinfodb: ip-geolocation-ipinfodb.apikey
+ip-geolocation-map-bing: ip-geolocation-map-bing.api_key ip-geolocation-map-bing.center ip-geolocation-map-bing.format ip-geolocation-map-bing.language ip-geolocation-map-bing.layer ip-geolocation-map-bing.map_path ip-geolocation-map-bing.marker ip-geolocation-map-bing.size
+ip-geolocation-map-google: ip-geolocation-map-google.api_key ip-geolocation-map-bing.center ip-geolocation-map-bing.format ip-geolocation-map-bing.language ip-geolocation-map-bing.layer ip-geolocation-map-bing.map_path ip-geolocation-map-bing.marker_style ip-geolocation-map-bing.size
+ip-geolocation-map-kml: ip-geolocation-map-kml.map_path
+ip-geolocation-maxmind: ip-geolocation-maxmind.maxmind_db
+ipidseq: probeport
+ipv6-ra-flood: ipv6-ra-flood.interface ipv6-ra-flood.timeout
+irc-botnet-channels: irc-botnet-channels.channels
+irc-unrealircd-backdoor: irc-unrealircd-backdoor.command irc-unrealircd-backdoor.kill irc-unrealircd-backdoor.wait
+jdwp-exec: jdwp-exec.cmd
+jdwp-inject: jdwp-inject.filename
+krb5-enum-users: krb5-enum-users.realm
+ldap-brute: ldap.base ldap.upnsuffix ldap.saveprefix ldap.savetype
+ldap-novell-getpass: ldap-novell-getpass.account ldap-novell-getpass.username ldap-novell-getpass.password
+ldap-search: ldap.username ldap.password ldap.qfilter ldap.searchattrib ldap.searchvalue ldap.base ldap.attrib ldap.maxobjects ldap.savesearch
+llmnr-resolve: llmnr-resolve.hostname llmnr-resolve.timeout
+metasploit-info: metasploit-info.username metasploit-info.password metasploit-info.command
+mmouse-exec: mmouse-exec.password mmouse-exec.application mmouse-exec.keys mmouse-exec.delay
+modbus-discover: modbus-discover.aggressive <boolean>
+mrinfo: mrinfo.target mrinfo.timeout
+ms-sql-brute: ms-sql-brute.ignore-lockout mssql.domain ms-sql-brute.brute-windows-accounts mssql.instance-all userdb passdb
+ms-sql-config: ms-sql-config.showall username password
+ms-sql-empty-password: mssql.instance-all
+ms-sql-hasdbaccess: mssql.username mssql.password ms-sql-hasdbaccess.limit
+ms-sql-info: mssql.instance-port
+ms-sql-query: mssql.username mssql.password mssql.database ms-sql-query.query
+ms-sql-xp-cmdshell: mssql.username mssql.password ms-sql-xp-cmdshell.cmd mssql-xp-cmdshell.cmd
+mtrace: mtrace.fromip mtrace.toip mtrace.group mtrace.firsthop mtrace.timeout
+mysql-audit: mysql-audit.username mysql-audit.password mysql-audit.filename
+mysql-dump-hashes: mysql-dump-hashes.username, mysql-dump-hashes.password
+mysql-query: mysql-query.query, mysql-query.username, mysql-query.password, mysql-query.noheaders
+ms-sql-tables: ms-sql-tables.maxdb mssql-tables.maxdb ms-sql-tables.maxtables mssql-tables.maxtables ms-sql-tables.keywords mssql-tables.keywords
+nat-pmp-mapport: nat-pmp-mapport.op nat-pmp-mapport.pubport nat-pmp-mapport.privport nat-pmp-mapport.protocol nat-pmp-mapport.lifetime
+netbus-info: netbus-info.password
+nje-node-brute: nje-node-brute.hostlist nje-node-brute.ohost
+nje-pass-brute: nje-pass-brute.ohost nje-pass-brute.rhost nje-pass-brute.sleep
+omp2-enum-targets: omp2.username omp2.password
+oracle-brute-stealth: oracle-brute-stealth.sid oracle-brute-stealth.nodefault oracle-brute-stealth.accounts oracle-brute-stealth.johnfile
+openvas-otp-brute: openvas-otp-brute.threads
+oracle-brute: oracle-brute.sid oracle-brute.nodefault tns.sid userdb passdb brute.credfile
+orcale-enum-users: oracle-enum-users.sid userdb tns.sid
+oracle-sid-brute: oraclesids
+p2p-conficker: checkall, checkconficker, realip,
+pjl_ready_message: pjl_ready_message
+qconn-exec: qconn-exec.timeout qconn-exec.bytes qconn-exec.cmd
+qscan: qscan.confidence qscan.delay qscann.numtrips qscan.numopen qscan.numclosed
+quake3-master-getservers: quake3-master-getservers.outputlimit
+resolveall: resolveall.hosts
+rpcap-info: creds.rpcap<username:password>
+rpc-grind: rpc-grind.threads
+rsync-brute: rsync-brute.module
+shodan-api: shodan-api.apikey shodan-api.outfile shodan-api.target
+sip-call-spoof: sip-call-spoof.ua sip-call-spoof.from sip-call-spoof.extension sip-call-spoof.src  sip-call-spoof.timeout
+sip-enum-users: sip-enum-users.minext sip-enum-users.maxnext sip-enum-users.padding sip-enum-users.users sip-enum-users.list
+smb-brute: smblockout brutelimit canaries
+smb-ls: smb-ls.share smb-ls.path smb-ls.pattern smb-ls.checksum
+smb-print-text: smb-print-text.printer smb-print-text.text smb-print-text.filename
+smb-psexec: config nodehide cleanup share sharepath time nocleanup nocipher key
+smb-vuln-conficker: smbuser smbpass
+smb-vuln-ms10-054: smb-vuln-ms10-054.unsafe smb-vuln-ms10-054.share
+smtp-commands: smtp-commands.domain
+smtp-enum-users: smtp-enum-users.domain smtp-enum-users.methods smtp.domain
+smtp-ntlm-info: smtp-ntlm-info.domain
+smtp-open-relay: smtp-open-relay.domain smtp.domain smtp-open-relay.ip smtp-open-relay.from smtp-open-relay.to
+smtp-vuln-cve2010-4344: smtp-vuln-cve2010-4344.exploit smtp-vuln-cve2010-4344.mailfrom smtp-vuln-cve2010-4344.mailto smtp-vuln-cve2010-4344.cmd
+smtp-vuln-cve2011-1720: smtp.domain
+smtp-vuln-cve2011-1764: smtp-vuln-cve2011-1764.mailfrom smtp-vuln-cve2011-1764.mailto
+snmp-brute: snmp-brute.communitiesdb unpwdb.passlimit
+targets-asn: targets-asn.asn targets-asn.whois_port targets-asn.whois_server
+targets-ipv6-map4to6: targets-ipv6-map4to6.IPv4Hosts targets-ipv6-subnet
+targets-ipv6-multicast-echo: targets-ipv6-multicast-echo.interface
+targets-ipv6-multicast-invalid-dst: targets-ipv6-multicast-invalid-dst.interface
+targets-ipv6-multicast-mld: targets-ipv6-multicast-mld.timeout targets-ipv6-multicast-mld.interface
+targets-ipv6-multicast-slaac: targets-ipv6-multicast-slaac.interface
+targets-ipv6-wordlist: targets-ipv6-wordlist.wordlist targets-ipv6-wordlist.nsegments targets-ipv6-wordlist.fillright targets-ipv6-subnet
+targets-sniffer: targets-sniffer.timeout targets-sniffer.iface
+targets-traceroute: newtargets
+targets-xml: targets-xml.iX targets-xml.state
+telnet-brute: telnet-brute.timeout telnet-brute.autosize
+tftp-enum: tftp-enum.filelist
+tso-brute: tso-brute.commands tso-brute.always_logon
+tso-enum: tso-enum.command
+unittest: unittest.run unittest.tests
+vtam-enum: idlist vtam-enum.path vtam-enum.macros vtam-enum.commands
+whois-ip: whois.whodb whodb
+xmpp-brute: xmpp-brute.auth xmpp-brute.servername
+xmpp-info: xmpp-info.server_name xmpp-info.alt_server_name xmpp-info.no_starttls
